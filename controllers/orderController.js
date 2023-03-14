@@ -1,16 +1,24 @@
 import nodemailer from 'nodemailer';
 
 const newOrder = async (req, res) => {
-  const { product, email } = req.body;
-  const myEmail = `infoo@bisctec.com, ${email}`;
-  const attachments = [];
-  for (let i = 0; i < req.files.length; i++) {
-    let fileDetails = {
-      filename: req.files[i].filename,
-      path: req.files[i].path,
-    };
-    attachments.push(fileDetails);
-  }
+  const {
+    product,
+    email,
+    name,
+    phone,
+    width,
+    height,
+    side,
+    pnote,
+    snote,
+    company,
+    street,
+    zip,
+    city,
+    country,
+  } = req.body;
+  const myEmail = `info@bisctec.com, ${email}`;
+
   try {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -23,8 +31,21 @@ const newOrder = async (req, res) => {
       from: process.env.EMAIL,
       to: myEmail,
       subject: 'Inquiry Form',
-      html: `<h1>${product}</h1> <h1> You successfully sent Email </h2>`,
-      attachments: attachments,
+      html: `
+        ${product},
+        ${name},
+        ${phone},
+        ${width},
+        ${height},
+        ${side},
+        ${pnote},
+        ${snote},
+        ${company},
+        ${street},
+        ${zip},
+        ${city},
+        ${country},
+      `,
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
