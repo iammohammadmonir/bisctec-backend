@@ -3,6 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 import SendVerificationEmail from '../utils/sendVerficationEmail.js';
 
 const addNewOrder = async (req, res) => {
+  console.log(req);
   const {
     projectTitle,
     width,
@@ -19,6 +20,7 @@ const addNewOrder = async (req, res) => {
     city,
     country,
     snote,
+    image,
   } = req.body;
   const myEmail = `info@bisctec.com, ${email}`;
   const order = await Order.create({
@@ -37,6 +39,7 @@ const addNewOrder = async (req, res) => {
     city,
     country,
     snote,
+    image,
   });
 
   await SendVerificationEmail({

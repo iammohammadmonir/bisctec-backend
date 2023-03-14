@@ -4,9 +4,9 @@ import connectDB from './db/connect.js';
 import 'express-async-errors';
 import cors from 'cors';
 import morgan from 'morgan';
-
 // routers
 import authRouter from './routes/orderRoutes.js';
+import contactRouter from './routes/contactRoutes.js';
 
 // middleware
 import notFoundMiddleware from './middleware/not-found.js';
@@ -23,6 +23,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/v1/order', authRouter);
+app.use('/api/v1/contact', contactRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
